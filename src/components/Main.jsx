@@ -1,5 +1,6 @@
 import React from 'react'
-import PhotographerList from './PhotographerList'
+import Card from './Card'
+import './styles/Main.css'
 import { MY_API_KEY } from '../Constants'
 /*will handle API logic and pass data to List */
 
@@ -8,13 +9,14 @@ class Main extends React.Component {
     super()
     this.state = {
       photos: [],
-      search: '' 
+      search: '',
+      isLoading: false 
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleInputSubmit = this.handleInputSubmit.bind(this)
+    this.handleLoading = this.handleLoading.bind(this)
   }
 
-    //let user be able to search by name
 
   handleInputChange(event) {
     this.setState({
@@ -27,15 +29,24 @@ class Main extends React.Component {
 
     //on user submit, save latest input as search term
     this.setState({
-      search: this.state.search
+      search: this.state.search,
+      isLoading: true
     })
 
     //trigger API call
     this.getUnsplashData()
   }
 
+  handleLoading() {
+    //when API call is triggered, switch isloading to true
+    //display animation
+    //getUnsplash will toggle isLoading back to false
+  }
+
 
   getUnsplashData() {
+    this.handleLoading()
+
     let search = this.state.search
     const url = `https://api.pexels.com/v1/search?query=${search}`
 
@@ -53,7 +64,9 @@ class Main extends React.Component {
     })
     .then(data => {
       this.setState({
-        photos: data.photos
+        photos: data.photos,
+        search: '',
+        isLoading: false
       })
       console.log(data.photos)
     })
@@ -61,6 +74,28 @@ class Main extends React.Component {
 
 /* need error handling in case no photos found*/
   render() {
+
+    let photoCards = this.state.photos.map(item => {
+      return (
+        <Card 
+          key={item.id}
+          item={item}
+        />
+      )
+    })
+
+
+    {/*handles loading indicator */}
+
+    <div className="isLoading">
+    {!this.state.isLoading && 
+      <div class="spinner">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+      </div>
+    }
+    </div>
+
     return (
       <main>
         <div className="wrapper">
@@ -76,8 +111,8 @@ class Main extends React.Component {
             <input type="submit" value="search"/>
           </form>
 
-          {/*get all results to be passed to PhotographerList */}
-          <PhotographerList photos={this.state.photos} />
+          {/*get all results to be passed to Card component */}
+          {photoCards}
         </div>
       </main>
     )
