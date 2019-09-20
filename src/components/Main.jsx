@@ -1,7 +1,6 @@
 import React from 'react'
 import PhotographerList from './PhotographerList'
-import { MY_UNSPLASH_KEY } from '../Constants'
-import axios from 'axios'
+import { MY_API_KEY } from '../Constants'
 /*will handle API logic and pass data to List */
 
 class Main extends React.Component {
@@ -21,7 +20,6 @@ class Main extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    // console.log(event)
   }
 
   handleInputSubmit(event) {
@@ -37,37 +35,31 @@ class Main extends React.Component {
   }
 
 
-  async getUnsplashData = () => {
-    
-    const searchTerm = this.state.search
+  getUnsplashData() {
+    let search = this.state.search
+    const url = `https://api.pexels.com/v1/search?query=${search}`
 
-    const response = await 
-    axios.get('https://api.unsplash.com/search/photos'), {
-      params: {query: searchTerm},
+    fetch(url, {
       headers: {
-        Authorization: 'Client-ID '+ MY_UNSPLASH_KEY
+        Authorization: MY_API_KEY
       }
-      
-    }
-    console.log(response)
-    this.setState({
-      photos: response
     })
-
-    // fetch(url)
-    // .then(response => {
-    //   console.log(response.results)
-    // })
-    // .then(json => {
-    //   this.setState({
-    //     photos: json
-    //   })
-    // }).catch(error => {
-    //   console.log(error)
-    // })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw Error(`Request rejected with status ${response.status}`)
+      } 
+    })
+    .then(data => {
+      this.setState({
+        photos: data.photos
+      })
+      console.log(data.photos)
+    })
   }
 
-
+/* need error handling in case no photos found*/
   render() {
     return (
       <main>
@@ -79,7 +71,7 @@ class Main extends React.Component {
             className="search"
             value={this.state.search}
             onChange={this.handleInputChange}
-            placeholder="Enter a country or state"
+            placeholder="Enter a search term"
             />
             <input type="submit" value="search"/>
           </form>
