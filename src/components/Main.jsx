@@ -2,7 +2,8 @@ import React from 'react'
 import Card from './Card'
 import './styles/Main.css'
 import { MY_API_KEY } from '../Constants'
-/*will handle API logic and pass data to List */
+
+/*will handle API logic and pass data to Card components */
 
 class Main extends React.Component {
   constructor() {
@@ -29,27 +30,24 @@ class Main extends React.Component {
 
     //on user submit, save latest input as search term
     this.setState({
-      search: this.state.search,
-      isLoading: true
+      search: this.state.search
     })
 
-    //trigger API call
+    //trigger API call and start the loading indicator
+    this.handleLoading()
     this.getUnsplashData()
   }
 
   handleLoading() {
-    //when API call is triggered, switch isloading to true
-    //display animation
-    //getUnsplash will toggle isLoading back to false
+    this.setState({
+      isLoading: true
+    })
   }
 
 
   getUnsplashData() {
-    this.handleLoading()
-
     let search = this.state.search
     const url = `https://api.pexels.com/v1/search?query=${search}`
-
     fetch(url, {
       headers: {
         Authorization: MY_API_KEY
@@ -72,12 +70,12 @@ class Main extends React.Component {
     })
   }
 
-/* need error handling in case no photos found*/
+/* missing error handling in case no photos found*/
   render() {
 
     let photoCards = this.state.photos.map(item => {
       return (
-        <Card 
+        <Card  
           key={item.id}
           item={item}
         />
@@ -85,17 +83,16 @@ class Main extends React.Component {
     })
 
 
-    {/*handles loading indicator */}
-
-    <div className="isLoading">
-    {!this.state.isLoading && 
-      <div class="spinner">
-        <div class="cube1"></div>
-        <div class="cube2"></div>
-      </div>
+    {/*view logic for loading indicator */}
+    if (this.state.isLoading) {
+      return (
+        <div class="spinner">
+          <div class="cube1"></div>
+          <div class="cube2"></div>
+        </div>
+      )
     }
-    </div>
-
+    
     return (
       <main>
         <div className="wrapper">
@@ -110,7 +107,7 @@ class Main extends React.Component {
             />
             <input type="submit" value="search"/>
           </form>
-
+           
           {/*get all results to be passed to Card component */}
           {photoCards}
         </div>

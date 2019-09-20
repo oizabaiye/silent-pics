@@ -4,9 +4,7 @@ import './styles/Card.css'
 /*View logic for each photo. Gets props from Main*/
 
 class Card extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+
 
   render() {
 
