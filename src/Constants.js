@@ -1,0 +1,1 @@
+export const MY_UNSPLASH_KEY = `${process.env.MY_UNSPLASH_KEY}`
