@@ -3,14 +3,13 @@ import './styles/Card.css'
 
 /*View logic for each photo. Gets props from Main*/
 
-class Card extends React.Component {
-
+class PhotoCard extends React.Component {
 
   render() {
 
     const photo = this.props.item
 
-    /*try to ex†ract photo url for alt */
+    /*!add code for extracting photo name from url for alt tag*/
 
     return (
       <div key={photo.id}>
@@ -25,4 +24,4 @@ class Card extends React.Component {
 
 }
 
-export default Card;
+export default PhotoCard;

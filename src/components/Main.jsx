@@ -1,51 +1,52 @@
+/*will handle API logic and pass data to Card components */
 import React from 'react'
-import Card from './Card'
+import PhotoCard from './PhotoCard'
 import './styles/Main.css'
+
+/*imports hidden API key */
 import { MY_API_KEY } from '../Constants'
 
-/*will handle API logic and pass data to Card components */
 
 class Main extends React.Component {
   constructor() {
     super()
+    /*in state: store photos, user entry, an error indicator & loading indicator */
     this.state = {
       photos: [],
       search: '',
+      error: null,
       isLoading: false 
     }
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleInputSubmit = this.handleInputSubmit.bind(this)
-    this.handleLoading = this.handleLoading.bind(this)
   }
 
-
-  handleInputChange(event) {
+  /*as user types, entry is recorded in this.state.search*/
+  handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
-  handleInputSubmit(event) {
+  /*on submit (or enter) */
+  handleInputSubmit = (event) => {
     event.preventDefault()
-
-    //on user submit, save latest input as search term
+    /*ensures error state is null (clears previous error)*/
     this.setState({
-      search: this.state.search
+      error: null
     })
-
-    //trigger API call and start the loading indicator
+    //start the loading indicator, and API call
     this.handleLoading()
-    this.getUnsplashData()
+    this.getData()
   }
 
-  handleLoading() {
+  /*on submit, switch isLoading to true, and render spinner */
+  handleLoading = () => {
     this.setState({
       isLoading: true
     })
   }
 
-
-  getUnsplashData() {
+  /*data handler */
+  getData = () => {
     let search = this.state.search
     const url = `https://api.pexels.com/v1/search?query=${search}`
     fetch(url, {
@@ -56,39 +57,40 @@ class Main extends React.Component {
     .then(response => {
       if (response.ok) {
         return response.json()
-      } else {
-        throw Error(`Request rejected with status ${response.status}`)
-      } 
+      }
     })
     .then(data => {
+      /*on receipt of response, clear <input> box, clear loading spinner, store results */
+      const photosArray = data.photos
+      if (photosArray.length === 0) {
+        this.setState({
+          photos: 'none',
+          isLoading: false
+        })
+      } else {
+        this.setState({
+          photos: data.photos,
+          search: '',
+          isLoading: false
+        })
+      }
+    }).catch(() => {
+      /*if there's a server issue */
       this.setState({
-        photos: data.photos,
-        search: '',
-        isLoading: false
+        error: 'serverError'
       })
-      console.log(data.photos)
     })
   }
 
-/* missing error handling in case no photos found*/
+
   render() {
 
-    let photoCards = this.state.photos.map(item => {
-      return (
-        <Card  
-          key={item.id}
-          item={item}
-        />
-      )
-    })
-
-
-    {/*view logic for loading indicator */}
+    {/*view logic if isLoading is truthy */}
     if (this.state.isLoading) {
       return (
-        <div class="spinner">
-          <div class="cube1"></div>
-          <div class="cube2"></div>
+        <div className="spinner">
+          <div className="cube1"></div>
+          <div className="cube2"></div>
         </div>
       )
     }
@@ -96,6 +98,7 @@ class Main extends React.Component {
     return (
       <main>
         <div className="wrapper">
+        {/*html form. onsubmit, call handleSubmit function */}
           <form onSubmit={this.handleInputSubmit}>
             <input 
             type="search" 
@@ -103,14 +106,36 @@ class Main extends React.Component {
             className="search"
             value={this.state.search}
             onChange={this.handleInputChange}
-            placeholder="Enter a search term"
+            placeholder="Enter a keyword"
             />
             <input type="submit" value="search"/>
           </form>
            
-          {/*get all results to be passed to Card component */}
-          {photoCards}
-        </div>
+
+          {/*view logic if problem with API */}
+          {
+            this.state.error === 'serverError' && 
+              <div className="error">
+                Server Error!
+              </div> 
+          }
+
+          {/*view logic if no API problem - render one of two options */}
+          {
+            this.state.photos === 'none' ? 
+              <div className="error">
+                Sorry, there are no photos matching that criteria
+              </div> 
+              :
+            this.state.photos.map(item => (
+              <PhotoCard  
+                key={item.id}
+                item={item}
+              />
+            ))
+          }
+        
+        </div> {/*closing tag for div.wrapper*/}
       </main>
     )
   }
