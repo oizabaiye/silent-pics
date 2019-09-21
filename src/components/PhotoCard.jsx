@@ -13,11 +13,12 @@ class PhotoCard extends React.Component {
 
     return (
       <div key={photo.id}>
-        <p>{photo.photographer}</p>
-        <p>{photo.photographer_url}</p>
         <div className="shot">
           <img src={photo.src.small} alt={photo.url}/>
         </div>
+
+        <p>By: {photo.photographer}</p>
+        <p>Website: {photo.photographer_url}</p>
       </div>
     )
   }

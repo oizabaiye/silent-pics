@@ -97,7 +97,7 @@ class Main extends React.Component {
     
     return (
       <main>
-        <div className="wrapper">
+        <div className="wrapper vh-100">
         {/*html form. onsubmit, call handleSubmit function */}
           <form onSubmit={this.handleInputSubmit}>
             <input 

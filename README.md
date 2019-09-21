@@ -1,16 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# A global eye
 
-## Available Scripts
+A global eye offers is a minimalist application that enables users to search for free, high-quality photographs on [Pexels.com](https://pexels.com).
 
-In the project directory, you can run:
+It is built and maintained by [Ahuoiza Baiye](https://ahuoizabaiye.com/).
 
-### `npm start`
+## Tools
 
-Runs the app in the development mode.<br>
+This application was built with React.js and styled with [Tachyons CSS](https://tachyons.io/), a mobile-first, accessible and functional CSS design system!
+
+It pulls data from the [Pexels API](https://www.pexels.com/api/documentation/) using JavaScript's native Fetch API.
+
+The code follows the conventions of Airbnb's [React Styleguide](https://github.com/airbnb/javascript/blob/master/react/README.md)
+
+## Installation
+
+Download the repo, and make sure to install needed dependencies with `npm install`
+
+To load the app in development mode, run `npm start`
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
 
 
