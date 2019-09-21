@@ -1,16 +1,16 @@
-# A global eye
+# Noticer
 
-A global eye offers is a minimalist application that enables users to search for free, high-quality photographs on [Pexels.com](https://pexels.com).
+Noticer is a minimalist application that enables users to search for free, high-quality photographs from [Pexels.com](https://pexels.com).
 
 It is built and maintained by [Ahuoiza Baiye](https://ahuoizabaiye.com/).
 
 ## Tools
 
-This application was built with React.js and styled with [Tachyons CSS](https://tachyons.io/), a mobile-first, accessible and functional CSS design system!
+This application was built with React.js and styled with [Tachyons CSS](https://tachyons.io/), a mobile-first, accessible and functional CSS design system.
 
 It pulls data from the [Pexels API](https://www.pexels.com/api/documentation/) using JavaScript's native Fetch API.
 
-The code follows the conventions of Airbnb's [React Styleguide](https://github.com/airbnb/javascript/blob/master/react/README.md)
+The code follows the conventions of Airbnb's [React Styleguide](https://github.com/airbnb/javascript/blob/master/react/README.md), with a few exceptions.
 
 ## Installation
 
