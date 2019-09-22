@@ -4,9 +4,10 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+
 body {
-  background-color: #FCFDFE;
+  background-color: #EFF4F8;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16px;
   text-align: center;
-  color: #031121;
-  font-family: 'Alef', sans-serif;
 }

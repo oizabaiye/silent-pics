@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="App">
+    <div className="App mw-100 dark-gray flex flex-column items-center">
       <Header />
       <Main />
       <Footer />

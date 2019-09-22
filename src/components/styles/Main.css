@@ -1,13 +1,15 @@
-.wrapper {
-  max-width: 90vw;
-  margin: 0 auto;
-}
 
 .error {
   padding-top: 30px;
 }
 
+.search {
+  color: #333;
+}
 
+.submit {
+  display: none;
+}
 
 /* custom loader by Tobias Ahlin 
 https://tobiasahlin.com/spinkit/

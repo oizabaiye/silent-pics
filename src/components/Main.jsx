@@ -97,18 +97,19 @@ class Main extends React.Component {
     
     return (
       <main>
-        <div className="wrapper vh-100">
+        <div className="wrapper">
+
         {/*html form. onsubmit, call handleSubmit function */}
           <form onSubmit={this.handleInputSubmit}>
             <input 
             type="search" 
             name="search" 
-            className="search"
+            className="search mt3 mb2 pa2"
             value={this.state.search}
             onChange={this.handleInputChange}
             placeholder="Enter a keyword"
             />
-            <input type="submit" value="search"/>
+            <input type="submit" value="search" className="submit"/>
           </form>
            
 

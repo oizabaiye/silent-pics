@@ -1,0 +1,15 @@
+.fw5 {
+  font-weight: 400;
+}
+
+/*shrinks photos on small screens*/
+@media (max-width: 565px) {
+  .shot {
+    width: 300px;
+    margin: 0 auto;
+  }
+
+  .shot img {
+    max-width: 100%;
+  }
+}
