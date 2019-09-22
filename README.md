@@ -1,8 +1,8 @@
-# Noticer
+# Silent Pics
 
-Noticer is a minimalist application that enables users to search for free, high-quality photographs from [Pexels.com](https://pexels.com).
+Silent Pics is a minimalist photo search application for the overwhelmed. It enables users to search for free, high-quality photographs from [Pexels.com](https://pexels.com) with little fuss.
 
-It is built and maintained by [Ahuoiza Baiye](https://ahuoizabaiye.com/).
+It is built by [Ahuoiza Baiye](https://ahuoizabaiye.com/).
 
 ## Tools
 
