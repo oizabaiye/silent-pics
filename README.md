@@ -8,7 +8,7 @@ It is built by [Ahuoiza Baiye](https://ahuoizabaiye.com/).
 
 This application was built with React.js and styled with [Tachyons CSS](https://tachyons.io/), a mobile-first, accessible and functional CSS design system.
 
-It pulls data from the [Pexels API](https://www.pexels.com/api/documentation/) using JavaScript's native Fetch API.
+It pulls data from the [Pexels API](https://www.pexels.com/api/) using JavaScript's native Fetch API.
 
 The code follows the conventions of Airbnb's [React Styleguide](https://github.com/airbnb/javascript/blob/master/react/README.md), with a few exceptions.
 
