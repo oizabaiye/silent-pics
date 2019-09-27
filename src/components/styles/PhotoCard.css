@@ -3,7 +3,7 @@
 }
 
 /*shrinks photos on small screens*/
-@media (max-width: 565px) {
+@media (max-width: 645px) {
   .shot {
     width: 300px;
     margin: 0 auto;

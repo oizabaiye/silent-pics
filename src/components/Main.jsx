@@ -64,20 +64,22 @@ class Main extends React.Component {
       const photosArray = data.photos
       if (photosArray.length === 0) {
         this.setState({
-          photos: 'none',
-          isLoading: false
+          photos: 'none'
         })
       } else {
         this.setState({
           photos: data.photos,
-          search: '',
-          isLoading: false
+          search: ''
         })
       }
     }).catch(() => {
       /*if there's a server issue */
       this.setState({
         error: 'serverError'
+      })
+    }).finally(() => {
+      this.setState({
+        isLoading: false
       })
     })
   }
@@ -116,15 +118,15 @@ class Main extends React.Component {
           {/*view logic if problem with API */}
           {
             this.state.error === 'serverError' && 
-              <div className="error">
-                Server Error!
+              <div className="error f5 f4-m f3-l ph2">
+                How embarrasing. There is an error
               </div> 
           }
 
           {/*view logic if no API problem - render one of two options */}
           {
             this.state.photos === 'none' ? 
-              <div className="error">
+              <div className="error f5 f4-m f3-l ph2">
                 Sorry, there are no photos matching that criteria
               </div> 
               :
