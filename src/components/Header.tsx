@@ -1,9 +1,7 @@
 import React from "react"
 import "./styles/Header.css"
 
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-const fetchDate = new Date()
-const today = days[fetchDate.getDay()]
+import { today } from "../utils/dates"
 
 function Header() {
 	return (
