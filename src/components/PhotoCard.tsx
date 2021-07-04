@@ -3,6 +3,11 @@ import "./styles/PhotoCard.css"
 
 /*View logic for each photo. Gets props from Main*/
 
+interface PhotoProps {
+	item: { url: string; id: number; src: { medium: string } }
+	// url: string
+}
+
 const createAlt = (address: string) => {
 	//searches for keyword photo in url, and cuts url after the photo/ string
 	const keyphrase: string = address.slice(address.indexOf("photo") + 6, address.length)
@@ -12,9 +17,9 @@ const createAlt = (address: string) => {
 	return alt
 }
 
-function PhotoCard(props: any) {
-	const photo: any = props.item
-	const url: string = props.item.url
+function PhotoCard(props: PhotoProps) {
+	const photo = props.item
+	const url = props.item.url
 	const altTag: string = createAlt(url)
 
 	return (

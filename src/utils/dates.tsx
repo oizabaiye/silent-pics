@@ -7,8 +7,8 @@ const days: string[] = [
 	"Friday",
 	"Saturday",
 ]
-const fetchDate: Date = new Date()
+const fetchDate = new Date()
 
-export const today: string = days[fetchDate.getDay()]
+export const today = days[fetchDate.getDay()]
 
-export const year: number = fetchDate.getFullYear()
+export const year = fetchDate.getFullYear()

@@ -6,27 +6,36 @@ import "./styles/Main.css"
 /*imports hidden API key */
 import { MY_API_KEY } from "../Constants"
 
+interface MainState {
+	photos: object[]
+	search: string
+	error: any
+	isLoading: boolean
+}
+
+interface EventInterface {
+	target: HTMLInputElement
+}
+// look up if there is an event type
+
 class Main extends React.Component {
-	constructor() {
-		super()
-		/*in state: store photos, user entry, an error indicator & loading indicator */
-		this.state = {
-			photos: [],
-			search: "",
-			error: null,
-			isLoading: false,
-		}
+	/*in state: store photos, user entry, an error indicator & loading indicator */
+	state: MainState = {
+		photos: [],
+		search: "",
+		error: null,
+		isLoading: false,
 	}
 
 	/*as user types, entry is recorded in this.state.search*/
-	handleInputChange = (event) => {
+	handleInputChange = (event: EventInterface) => {
 		this.setState({
 			[event.target.name]: event.target.value,
 		})
 	}
 
 	/*on submit (or enter) */
-	handleInputSubmit = (event) => {
+	handleInputSubmit = (event: any) => {
 		event.preventDefault()
 		/*ensures error state is null (clears previous error)*/
 		this.setState({
@@ -120,12 +129,12 @@ class Main extends React.Component {
 					)}
 
 					{/*view logic if no API problem - render one of two options */}
-					{this.state.photos === "none" ? (
+					{this.state.photos.length === 0 ? (
 						<div className='error f5 f4-m f3-l ph2'>
 							Sorry, there are no photos matching that criteria
 						</div>
 					) : (
-						this.state.photos.map((item) => <PhotoCard key={item.id} item={item} />)
+						this.state.photos.map((item: any) => <PhotoCard key={item.id} item={item} />)
 					)}
 				</div>
 			</main>
