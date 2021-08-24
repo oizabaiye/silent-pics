@@ -13,9 +13,9 @@ interface MainState {
 	isLoading: boolean
 }
 
-interface EventInterface {
-	target: HTMLInputElement
-}
+// interface EventInterface {
+// 	target: HTMLInputElement
+// }
 // look up if there is an event type
 
 class Main extends React.Component {
@@ -28,14 +28,14 @@ class Main extends React.Component {
 	}
 
 	/*as user types, entry is recorded in this.state.search*/
-	handleInputChange = (event: EventInterface) => {
+	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({
 			[event.target.name]: event.target.value,
 		})
 	}
 
 	/*on submit (or enter) */
-	handleInputSubmit = (event: any) => {
+	handleInputSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 		/*ensures error state is null (clears previous error)*/
 		this.setState({
@@ -55,8 +55,8 @@ class Main extends React.Component {
 
 	/*data handler */
 	getData = () => {
-		let search = this.state.search
-		const url = `https://api.pexels.com/v1/search?query=${search}`
+		let search: {} = this.state.search
+		const url: string = `https://api.pexels.com/v1/search?query=${search}`
 		fetch(url, {
 			headers: {
 				Authorization: MY_API_KEY,
